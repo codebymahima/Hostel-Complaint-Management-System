@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raise a complaint</title>
+    <link rel="stylesheet" href="../css styling/student.css">
+</head>
+<body>
+    <div class="main">
+        <div class="side">
+            <aside>
+                <h2 class="sideHeader">Student portal</h2>
+                <button class="btn">Raise complaint</button>
+                <button class="btn">View complaint</button>
+                <button class="logout">Logout</button>
+            </aside>
+        </div>
+            <div class="form">
+
+                <form action="get">
+                    <h2 class="heading">Raise a complaint</h2>
+                    
+
+                        <label class="category" for="category">Category*</label>
+                        <select name="category" id="category">
+                            <option value="" disabled selected>Select the category</option>
+                            <option value="Electrical">Electrical</option>
+                            <option value="Water">Water</option>
+                            <option value="Personal">Personal</option>
+                            <option value="hygiene">Hygiene</option>
+                        </select>
+                    
+
+                    <label for="title">Title</label>
+                    <input type="text " id="title" name="title" placeholder="Brief title for your complaint">
+
+                    <label for="description">Description</label>
+                    <textarea name="description" class="txt-box" id="description" rows="5" placeholder="Provide detailed description of your complaint"></textarea>
+
+                    <button class="submit">Submit complaint</button>
+
+
+                </form>
+        </div>
+    </div>
+</body>
+</html>
