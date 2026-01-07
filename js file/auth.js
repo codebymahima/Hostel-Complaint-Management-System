@@ -51,7 +51,6 @@ if (adminLogin) {
             return; 
         }
 
-
         window.location.href = "admin-dashboard.html";
     });
 }
@@ -68,5 +67,13 @@ const raiseComplaint = document.getElementById("raise-complaint");
 if (raiseComplaint) {
     raiseComplaint.addEventListener("click", () => {
         window.location.href = "raise-complaints.html";
+    });
+}
+
+const viewComplaint = document.getElementById("view-complaint"); 
+
+if (viewComplaint) {
+    viewComplaint.addEventListener("click", () => {
+        window.location.href = "view-complaints.html";
     });
 }

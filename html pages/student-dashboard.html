@@ -7,32 +7,28 @@
     <link rel="stylesheet" href="../css styling/student.css">
 </head>
 <body>
- <div class="header">
-  <h1>Student Dashboard</h1>
 
-  <div class="info">
-    <div id="image"></div>
-    <p id="name">Sample Name</p>
-  </div>
- </div>
+    <div class="header">
+        <h1>Student Dashboard</h1>
 
- <div class="main-box">
-
-    <div class="dashboard-grid">
-    <div class="content-box" >
-        <div id="raise-complaint">Raise Complaint</div>
+        <div class="profile">
+            <span>Student</span>
+            <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Profile">
+        </div>
     </div>
 
-    <div class="content-box" id="view">
-        <div>View Complaint</div>
+    <div class="container">
+        <h2>Welcome to Student Dashboard</h2>
+
+        <div class="cards">
+
+            <div class="card blue" id="raise-complaint">Raise Complaint</div>
+            <div class="card yellow" id="view-complaint">View Complaint</div>
+        </div>
+         <div class="card green">Notifications</div>
     </div>
-</div>
+     
+     <script src="../js file/auth.js"></script>
 
-<div id="notification">
-    <div>Notifications</div>
-</div>
-
- </div>
-    <script src="../js file/auth.js"></script>
 </body>
 </html>
