@@ -11,9 +11,18 @@
     <div class="header">
         <h1>Student Dashboard</h1>
 
-        <div class="profile">
+        <div class="profile" id="profileBtn">
             <span>Student</span>
-            <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Profile">
+            <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">
+        </div>
+
+        <!-- profile pe click krne ke liye -->
+        <div class="profile-menu" id="profileMenu">
+            <p><strong>Name:</strong> Student</p>
+            <br>
+            <p><strong>Email:</strong> student@example.com</p>
+            <br>
+            <button id="logoutBtn">Logout</button>
         </div>
     </div>
 
@@ -21,14 +30,19 @@
         <h2>Welcome to Student Dashboard</h2>
 
         <div class="cards">
-
-            <div class="card blue" id="raise-complaint">Raise Complaint</div>
-            <div class="card yellow" id="view-complaint">View Complaint</div>
+            <div class="card" id="raise-complaint">Raise Complaint</div>
+            <div class="card" id="view-complaint">View Complaint</div>
         </div>
-         <div class="card green">Notifications</div>
+
+        <div class="card" id="notification">Notifications</div>
     </div>
-     
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="../js file/supabase.js"></script>
+    <script src="../js file/student.js"></script>
      <script src="../js file/auth.js"></script>
+
+
 
 </body>
 </html>
