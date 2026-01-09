@@ -12,5 +12,5 @@ window.supabaseClient = supabase.createClient(
   SUPABASE_KEY,
 );
 
-console.log("Supabase client ready:", window.supabaseClient);
+console.log("Supabase ready:", window.supabaseClient);
 console.log("Auth object:", window.supabaseClient.auth);

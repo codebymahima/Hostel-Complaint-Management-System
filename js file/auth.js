@@ -1,197 +1,182 @@
-console.log("Supabase in auth.js:", supabaseClient);
-console.log("Supabase auth:", supabaseClient?.auth);
+/* =========================
+   AUTH.JS
+========================= */
 
-/*index se register */
-const btn1 = document.getElementById("btn1");
-if (btn1) {
-    btn1.addEventListener("click", () => {
-        window.location.href = "student-register.html";
-    });
+function $(id) {
+  return document.getElementById(id);
 }
 
+document.addEventListener("DOMContentLoaded", async () => {
+  if (!window.supabaseClient) {
+    console.error("Supabase not loaded");
+    return;
+  }
 
-const btn2 = document.getElementById("btn2");
-if (btn2) {
-    btn2.addEventListener("click", () => {
-        window.location.href = "admin-register.html";
+  const currentPage = window.location.pathname.split("/").pop();
+
+  // -------- SESSION CHECK ----------
+  const protectedPages = [
+    "student-dashboard.html",
+    "raise-complaints.html",
+    "view-complaints.html",
+    "admin-dashboard.html",
+    "total-complaints.html",
+    "new-complaints.html",
+    "pending-complaints.html",
+    "resolved-complaints.html"
+  ];
+
+  if (protectedPages.includes(currentPage)) {
+    const { data: { user } } = await window.supabaseClient.auth.getUser();
+    if (!user) window.location.href = currentPage.includes("admin") ? "admin-register.html" : "student-register.html";
+  }
+
+  // -------- STUDENT LOGIN ----------
+  const studentLoginBtn = $("student-login");
+  if (studentLoginBtn) {
+    studentLoginBtn.addEventListener("click", async () => {
+      const email = $("student-username").value.trim();
+      const password = $("student-password").value.trim();
+      const hostelCode = $("hostel-code").value.trim();
+
+      if (!email || !password || !hostelCode) return alert("All fields required");
+
+      const { data, error } = await window.supabaseClient.auth.signInWithPassword({ email, password });
+
+      if (error) return alert(error.message);
+
+      // Optionally verify hostel code here if needed
+      window.location.href = "student-dashboard.html";
     });
-}
+  }
 
-const btn3 = document.getElementById("btn3");
-if (btn3) {
-    btn3.addEventListener("click", () => {
-        window.location.href = "signup.html";
+  // -------- ADMIN LOGIN ----------
+  const adminLoginBtn = $("admin-login");
+  if (adminLoginBtn) {
+    adminLoginBtn.addEventListener("click", async () => {
+      const email = $("admin-username").value.trim();
+      const password = $("admin-password").value.trim();
+      if (!email || !password) return alert("All fields required");
+
+      const { data, error } = await window.supabaseClient.auth.signInWithPassword({ email, password });
+      if (error) return alert(error.message);
+
+      window.location.href = "admin-dashboard.html";
     });
-}
+  }
 
-//student dashboard pe profile
+  // -------- BACK BUTTON ----------
+  $("back")?.addEventListener("click", () => window.history.back());
 
-document.getElementById("profileBtn").addEventListener("click", () => {
-    const menu = document.getElementById("profileMenu");
-
-    menu.style.display = (menu.style.display === "block")
-        ? "none"
-        : "block";
-});
-
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    const btn = document.getElementById("profileBtn");
-    const menu = document.getElementById("profileMenu");
-
-    // CLICK ON PROFILE → SHOW/HIDE
-    btn.addEventListener("click", (event) => {
-        event.stopPropagation();
-        menu.classList.toggle("show");
-    });
-
-    // CLICK ANYWHERE ELSE → HIDE MENU
-    document.addEventListener("click", () => {
-        menu.classList.remove("show");
-    });
-
-});
-
-
-
-
-
-
-document.addEventListener("DOMContentLoaded", () => {
-    const profileBtn = document.getElementById("profileBtn");
-    const profileMenu = document.getElementById("profileMenu");
-
-    profileBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        profileMenu.classList.toggle("show");
-    });
-
-    document.addEventListener("click", () => {
-        profileMenu.classList.remove("show");
-    });
-});
-
-
-//login options
-const studentLogin = document.getElementById("student-login");
-
-if (studentLogin) {
-  studentLogin.addEventListener("click", async () => {
-
-    console.log("Login button clicked ✅");
-
-    const email = document.getElementById("student-username").value.trim();
-    const password = document.getElementById("student-password").value.trim();
-
-    console.log("Inputs:", { email, password });
-
-    if (!email || !password) {
-      alert("Please enter email and password!");
-      return;
-    }
-
-    console.log("Calling Supabase Auth...");
-
-    const { data, error } = await window.supabaseClient.auth.signInWithPassword({
-      email,
-      password
-    });
-
-    console.log("Auth response:", data, error);
-
-    if (error) {
-      alert(error.message);
-      return;
-    }
-
-    const user = data.user;
-    console.log("Logged in user:", user);
-
-    // TEMP: direct role assign
-    const { error: updateError } = await window.supabaseClient
-      .from("profiles")
-      .update({
-        role: "student"
-      })
-      .eq("id", user.id);
-
-    if (updateError) {
-      console.log(updateError);
-      alert("Profile update failed");
-      return;
-    }
-
-    console.log("Redirecting 🚀");
-    window.location.href = "student-dashboard.html";
+  // -------- LOGOUT ----------
+  document.querySelector(".logout")?.addEventListener("click", async () => {
+    await window.supabaseClient.auth.signOut();
+    window.location.href = currentPage.includes("admin") ? "admin-register.html" : "student-register.html";
   });
-}
-
-const adminLogin = document.getElementById("admin-login");
-
-if(adminLogin){
-    adminLogin.addEventListener("click", async()=>{
-        const email = document.getElementById("admin-username").value.trim();
-        const password = document.getElementById("admin-password").value.trim();
-
-        if(!email || !password){
-            alert("Please enter email and password");
-            return;
-        }
-
-        const {data, error} = await window.supabaseClient.auth.signInWithPassword({
-            email, password
-        });
-
-        if (error){
-            alert(error.message);
-            return;
-        }
-
-        const user = data.user;
-
-        // Role check
-        const{data: profile} = await window.supabaseClient
-        .from("profiles")
-        .select("role")
-        .eq("id", user.id)
-        .single();
-
-        if(!profile || profile.role !== "admin"){
-            alert("Not authorized as admin");
-            await supabaseClient.auth.signOut();
-            return;
-        }
-
-        window.location.href = "admin-dashboard.html";
-    });
-}
-
-// ------------------------------------------
-
-// -------------------------------
+});
 
 
-const back = document.getElementById("back");
-if (back) {
-    back.addEventListener("click", async() => {
-        await window.supabaseClient.auth.signOut();
-        window.location.href = "index.html";
-    });
-}
 
-const raiseComplaint = document.getElementById("raise-complaint"); 
 
-if (raiseComplaint) {
-    raiseComplaint.addEventListener("click", () => {
-        window.location.href = "raise-complaints.html";
-    });
-}
 
-const viewComplaint = document.getElementById("view-complaint"); 
 
-if (viewComplaint) {
-    viewComplaint.addEventListener("click", () => {
-        window.location.href = "view-complaints.html";
-    });
-}
+
+
+// /* =========================
+//    AUTH.JS – LOGIN / LOGOUT / SESSION
+// ========================= */
+
+// function $(id) {
+//   return document.getElementById(id);
+// }
+
+// document.addEventListener("DOMContentLoaded", async () => {
+//     if (!window.supabaseClient) {
+//         console.error("Supabase not loaded");
+//         return;
+//     }
+
+//     // SESSION CHECK (for protected pages)
+//     const protectedPages = ["student-dashboard.html", "raise-complaint.html", "view-complaint.html"];
+//     const currentPage = window.location.pathname.split("/").pop();
+
+//     if (protectedPages.includes(currentPage)) {
+//         const { data } = await window.supabaseClient.auth.getSession();
+//         if (!data.session) {
+//             window.location.href = "index.html";
+//         }
+//     }
+
+//     // STUDENT LOGIN
+//     const loginBtn = $("student-login");
+//     if (loginBtn) {
+//         loginBtn.addEventListener("click", async () => {
+//             const email = $("student-username").value.trim();
+//             const password = $("student-password").value.trim();
+
+//             if (!email || !password) {
+//                 alert("Please enter email and password");
+//                 return;
+//             }
+
+//             const { data, error } = await window.supabaseClient.auth.signInWithPassword({ email, password });
+
+//             if (error) {
+//                 alert(error.message);
+//                 return;
+//             }
+
+//             window.location.href = "student-dashboard.html";
+//         });
+//     }
+
+//     // LOGOUT
+//     const logoutBtn = $("back") || document.querySelector(".logout");
+//     if (logoutBtn) {
+//         logoutBtn.addEventListener("click", async () => {
+//             await window.supabaseClient.auth.signOut();
+//             window.location.href = "index.html";
+//         });
+//     }
+// });
+
+
+
+
+// function $(id) { return document.getElementById(id); }
+
+// document.addEventListener("DOMContentLoaded", async () => {
+//   if (!window.supabaseClient) return;
+
+//   // SESSION CHECK
+//   const protectedPages = ["student-dashboard.html","raise-complaints.html","view-complaints.html"];
+//   const currentPage = window.location.pathname.split("/").pop();
+//   if (protectedPages.includes(currentPage)) {
+//     const { data } = await window.supabaseClient.auth.getSession();
+//     if (!data.session) window.location.href = "index.html";
+//   }
+
+//   // STUDENT LOGIN
+//   const loginBtn = $("student-login");
+//   if (loginBtn) {
+//     loginBtn.addEventListener("click", async () => {
+//       const email = $("student-username")?.value.trim();
+//       const password = $("student-password")?.value.trim();
+//       if (!email || !password) return alert("Please enter email and password");
+
+//       const { data, error } = await window.supabaseClient.auth.signInWithPassword({ email, password });
+//       if (error) return alert(error.message);
+
+//       window.location.href = "student-dashboard.html";
+//     });
+//   }
+
+//   // LOGOUT
+//   const logoutBtn = $("back") || document.querySelector(".logout");
+//   if (logoutBtn) {
+//     logoutBtn.addEventListener("click", async () => {
+//       await window.supabaseClient.auth.signOut();
+//       window.location.href = "index.html";
+//     });
+//   }
+// });

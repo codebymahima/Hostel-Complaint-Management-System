@@ -29,11 +29,19 @@ nav {
     margin-left: 18px;
 }
 
+/* .profile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+} */
+
 .profile {
     display: flex;
     align-items: center;
     gap: 15px;
     cursor: pointer;
+    position: relative; /* needed for absolute menu inside */
 }
 
 .profile img {
@@ -50,7 +58,7 @@ nav {
     top: 55px;
     right: 0;
     width: 200px;
-    height: 100px;
+    height: auto;
     background: white;
     color: black;
     padding: 15px;
@@ -59,11 +67,22 @@ nav {
     display: none;
     z-index: 1000;
 }
+ /* .profile-menu {
+    height: auto;
+    padding: 15px;
+} */
 
 .profile-menu.show {
     display: block;
 }
 
+#logoutBtn{
+    background-color: red;
+    color: white;
+    height:40px;
+    width: 100px;
+    padding : 4px;
+}
 
 
 .container {
@@ -99,11 +118,16 @@ nav {
     font-size: 20px;
     width: 300px;
     height: 150px;
-    /* padding: 40px 30px; */
     margin: 20px;
-    border: 2px solid whitesmoke;
+    border: none; /* instead of whitesmoke */
     border-radius: 20px;
+    cursor: pointer; /* missing */
+    transition: 0.3s;
 
+}
+
+.card-btn:hover {
+    transform: scale(1.05);
 }
 
 .red{

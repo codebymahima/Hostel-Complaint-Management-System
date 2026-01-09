@@ -17,9 +17,9 @@
             <h1 class="head1">Hostel complaint system</h1>
             <h4 class="head2">Select your role to continue</h4>
             <div class="button">
-                <button id="btn1" class="btn">Student login</button>
-                <button id="btn2" class="btn">Admin login</button>
-                <button id="btn3" class="btn">Sign Up</button>
+                <button id="student-login" class="btn">Student login</button>
+                <button id="admin-login" class="btn">Admin login</button>
+                <button id="signup" class="btn">Sign Up</button>
             </div>
             <!-- <label for="std">Student</label>
                 <input type="radio" id="std" name="Role" value="Student">
@@ -28,10 +28,19 @@
 
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-    <script src="../js file/supabase.js"></script>
-    <script src="../js file/auth.js"></script>
+    <script>
+        document.getElementById("student-login").addEventListener("click", () => {
+            window.location.href = "student-register.html";
+        });
 
+        document.getElementById("admin-login").addEventListener("click", () => {
+            window.location.href = "admin-register.html";
+        });
+
+        document.getElementById("signup").addEventListener("click", () => {
+            window.location.href = "signup.html";
+        });
+    </script>
 
 </body>
 

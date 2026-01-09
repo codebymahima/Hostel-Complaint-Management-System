@@ -48,7 +48,7 @@ body {
     z-index: 2000;
 }
 
-#logoutBtn{
+#back{
     background-color: red;
     color: white;
     height:40px;
@@ -77,7 +77,7 @@ body {
 
 .cards {
     display: flex;
-    justify-content: space-around;
+    /* justify-content: space-around; */
 }
 
 .card {
@@ -99,12 +99,12 @@ body {
 }
 
 
-#raise-complaint {
+#dash-raise-complaint {
     background: #0099ff;
       color: #333;
 }
 
-#view-complaint {
+#dash-view-complaint {
     background: #f7f76a;
     color: #333;
 }
