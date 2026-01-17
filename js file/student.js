@@ -137,7 +137,6 @@ if (notificationList) {
     : "<p>No notifications</p>";
 }
 
-
 });
 
 

@@ -154,3 +154,25 @@ h3{
 .pending { background: #fef3c7; color: #92400e; }
 .progress { background: #dbeafe; color: #1e40af; }
 .resolved { background: #dcfce7; color: #166534; }
+
+/* Notification Card — same styling as complaint-card */
+.notification-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.notification-card p{
+    font-family: poppins;
+    font-size: 15px;
+    color: #374151;
+}
+
+.notification-card small{
+    display: block;
+    margin-top: 6px;
+    color: gray;
+    font-size: 13px;
+}

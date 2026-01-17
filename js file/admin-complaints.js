@@ -98,3 +98,39 @@ document.addEventListener("click", async (e) => {
 });
 
 });
+
+
+//total-cmp
+function renderComplaint(c) {
+    const list = document.getElementById("complaintList");
+
+    const card = document.createElement("div");
+    card.className = "complaint-card";
+
+    // Clean status
+    const statusText = c.status.trim().toLowerCase(); 
+
+    let statusClass = "";
+    if (statusText.includes("pending")) {
+        statusClass = "status-pending";
+    }
+    else if (statusText.includes("resolved") || statusText.includes("solved")) {
+        statusClass = "status-resolved";
+    }
+
+    card.innerHTML = `
+        <h3>${c.title}</h3>
+        <p>${c.details}</p>
+
+        <div class="status-box ${statusClass}">
+            ${c.status}
+        </div>
+
+        ${statusText.includes("pending") 
+            ? `<button class="resolve-btn" onclick="markResolved('${c.id}')">Mark as Resolved</button>` 
+            : ""
+        }
+    `;
+
+    list.appendChild(card);
+}

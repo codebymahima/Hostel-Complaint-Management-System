@@ -163,3 +163,64 @@ nav {
   text-align: center;
   margin-bottom: 20px;
 }
+
+/* totalcomplaint */
+.complaint-card{
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 18px;
+    border: 2px solid #e5e7eb;
+}
+
+/* Title */
+.complaint-card h3{
+    font-size: 19px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+/* Description */
+.complaint-card p{
+    font-size: 15px;
+    color: #444;
+    margin-bottom: 14px;
+}
+
+/* --- STATUS BOX --- */
+.status-box{
+    padding: 10px 14px;
+    border-radius: 8px;
+    width: fit-content;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: capitalize;
+    color: white;
+    margin-bottom: 10px;
+}
+
+/* Red for Pending */
+.status-pending{
+    background-color: #d10000;
+}
+
+/* Green for solved */
+.status-resolved{
+    background-color: #008f39;
+}
+
+/* Resolve Button */
+.resolve-btn{
+    padding: 7px 16px;
+    background: blue;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.resolve-btn:hover{
+    background: darkblue;
+}
+
