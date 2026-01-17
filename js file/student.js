@@ -79,6 +79,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         alert("Complaint submission failed");
         return;
       }
+      await window.supabaseClient.from("notifications").insert([{
+  student_id: user.id,
+  message: "Your complaint was successfully submitted"
+}]);
 
       window.location.href = "view-complaints.html";
     });
@@ -105,6 +109,35 @@ document.addEventListener("DOMContentLoaded", async () => {
         `).join("")
       : "<p>No complaints yet</p>";
   }
+
+
+  // -------- GO BACK TO DASHBOARD ----------
+document.getElementById("go-dashboard")?.addEventListener("click", () => {
+  window.location.href = "student-dashboard.html";
+});
+
+// -------- NOTIFICATION PAGE ----------
+document.getElementById("notification")?.addEventListener("click", () => {
+  window.location.href = "notifications.html";
+});
+
+// -------- NOTIFICATIONS ----------
+const notificationList = document.getElementById("notificationList");
+if (notificationList) {
+  const { data, error } = await window.supabaseClient
+    .from("notifications")
+    .select("*")
+    .eq("student_id", user.id)
+    .order("created_at", { ascending: false });
+
+  if (error) return console.error(error);
+
+  notificationList.innerHTML = data.length
+    ? data.map(n => `<p>🔔 ${n.message}</p>`).join("")
+    : "<p>No notifications</p>";
+}
+
+
 });
 
 

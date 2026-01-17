@@ -24,6 +24,9 @@ document.addEventListener("DOMContentLoaded", () => {
             email,
             password,
             options: {
+                // 🔽 YAHAN ADD KIYA HAI
+                emailRedirectTo: "http://localhost:3000/student-register.html",
+
                 data: {
                     full_name: fullName,
                     enrollment,
@@ -34,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (error) return alert("Signup failed: " + error.message);
 
-        alert("Signup successful! Please login.");
+        alert("Signup successful! Please check your email and then login.");
         window.location.href = "student-register.html";
     });
 });

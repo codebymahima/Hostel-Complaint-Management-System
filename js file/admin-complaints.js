@@ -40,14 +40,21 @@ document.addEventListener("DOMContentLoaded", async () => {
   const list = document.getElementById("complaintList");
   if (list) {
     list.innerHTML = complaints.length
-      ? complaints.map(c => `
-          <div class="complaint-card">
-            <h3>${c.title}</h3>
-            <p>${c.description}</p>
-            <small>Status: ${c.status}</small>
-          </div>
-        `).join("")
-      : "<p>No complaints found</p>";
+  ? complaints.map(c => `
+      <div class="complaint-card">
+        <h3>${c.title}</h3>
+        <p>${c.description}</p>
+        <small>Status: ${c.status}</small>
+
+        ${c.status === "pending" ? 
+          `<button class="resolve-btn" data-id="${c.id}" data-student="${c.student_id}">
+            Mark as Resolved
+          </button>` 
+        : ""}
+      </div>
+    `).join("")
+  : "<p>No complaints found</p>";
+
   }
 
   // -------- Chart ----------
@@ -69,4 +76,41 @@ document.addEventListener("DOMContentLoaded", async () => {
       plugins: { legend: { position: 'bottom' } }
     }
   });
+
+
+  // -------- RESOLVE COMPLAINT + NOTIFICATION ----------
+document.addEventListener("click", async (e) => {
+  if (!e.target.classList.contains("resolve-btn")) return;
+
+  const complaintId = e.target.dataset.id;
+  const studentId = e.target.dataset.student;
+
+  // 1️⃣ Update complaint status
+  const { error: updateError } = await window.supabaseClient
+    .from("complaints")
+    .update({ status: "resolved" })
+    .eq("id", complaintId);
+
+  if (updateError) {
+    alert("Failed to resolve complaint");
+    console.error(updateError);
+    return;
+  }
+
+  // 2️⃣ Insert notification (STEP 5 ✅)
+  const { error: notifError } = await window.supabaseClient
+    .from("notifications")
+    .insert([{
+      student_id: studentId,
+      message: "Your complaint has been resolved"
+    }]);
+
+  if (notifError) {
+    console.error("Notification error:", notifError);
+  }
+
+  alert("Complaint resolved successfully");
+  location.reload(); // refresh list
+});
+
 });
