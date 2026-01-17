@@ -42,14 +42,6 @@
     justify-content: center;
 }
 
-/* #student-login ,
-#admin-login{
-      width: 200px;
-    height: 50px;
-    padding: 12px;
-    margin: 10px;
-} */
-
 .btn{
      width: 200px;
     height: 50px;
@@ -65,13 +57,3 @@
     justify-items: center;
     align-self: center;
 }
-
-
-
-/* #signup{
-      width: 350px;
-    height: 50px;
-    padding: 12px;
-    margin: 10px;
-} */
-
