@@ -35,11 +35,23 @@
 .head2{
     padding: 5px;
     margin-bottom: 10px;
-   
 }
 
+.row{
+    display: flex;
+    justify-content: center;
+}
+
+/* #student-login ,
+#admin-login{
+      width: 200px;
+    height: 50px;
+    padding: 12px;
+    margin: 10px;
+} */
+
 .btn{
-    width: 350px;
+     width: 200px;
     height: 50px;
     padding: 12px;
     margin: 10px;
@@ -53,4 +65,13 @@
     justify-items: center;
     align-self: center;
 }
+
+
+
+/* #signup{
+      width: 350px;
+    height: 50px;
+    padding: 12px;
+    margin: 10px;
+} */
 
