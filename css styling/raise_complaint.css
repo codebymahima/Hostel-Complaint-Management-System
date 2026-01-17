@@ -21,9 +21,6 @@ html, body {
     min-height: 100vh;
 }
 .side{
-    /* display: inline-block; */
-   
-    
     height: 100%;
     background-color: blue;
 }
@@ -39,7 +36,6 @@ html, body {
   margin: 30px;
   border: 2px solid rgb(234, 237, 236);
   border-radius: 20px;
-  /* height: 100%; */
 }
 
 .form form{

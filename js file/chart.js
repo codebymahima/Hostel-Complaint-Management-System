@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const page = document.body.dataset.page;
 
-  // chart sirf dashboard + total complaints
   if (page !== "dashboard" && page !== "all") return;
 
   if (!window.supabaseClient) {

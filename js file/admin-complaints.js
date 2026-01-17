@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-  // -------- Profile Menu ----------
+  //Profile Menu 
   const profileBtn = document.getElementById("profileBtn");
   const profileMenu = document.getElementById("profileMenu");
   profileBtn?.addEventListener("click", (e) => {
@@ -22,10 +22,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 
-  // -------- Determine Page Type ----------
+  // Determine Page Type
   const pageType = document.querySelector(".heading")?.textContent.toLowerCase();
 
-  // -------- Fetch Complaints ----------
+  // Fetch Complaints 
   let query = window.supabaseClient.from("complaints").select("*").order("created_at", { ascending: false });
   
   if (pageType.includes("pending")) query = query.eq("status", "pending");
@@ -62,14 +62,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
 
-  // -------- RESOLVE COMPLAINT + NOTIFICATION ----------
+  // RESOLVE COMPLAINT + NOTIFICATION
 document.addEventListener("click", async (e) => {
   if (!e.target.classList.contains("resolve-btn")) return;
 
   const complaintId = e.target.dataset.id;
   const studentId = e.target.dataset.student;
 
-  // 1️⃣ Update complaint status
+  //  Update complaint status
   const { error: updateError } = await window.supabaseClient
     .from("complaints")
     .update({ status: "resolved" })
@@ -81,7 +81,6 @@ document.addEventListener("click", async (e) => {
     return;
   }
 
-  // 2️⃣ Insert notification (STEP 5 ✅)
   const { error: notifError } = await window.supabaseClient
     .from("notifications")
     .insert([{
@@ -94,20 +93,19 @@ document.addEventListener("click", async (e) => {
   }
 
   alert("Complaint resolved successfully");
-  location.reload(); // refresh list
+  location.reload(); 
 });
 
 });
 
 
-//total-cmp
+//total-complaint
 function renderComplaint(c) {
     const list = document.getElementById("complaintList");
 
     const card = document.createElement("div");
     card.className = "complaint-card";
 
-    // Clean status
     const statusText = c.status.trim().toLowerCase(); 
 
     let statusClass = "";

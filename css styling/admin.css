@@ -29,26 +29,18 @@ nav {
     margin-left: 18px;
 }
 
-/* .profile {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    cursor: pointer;
-} */
-
 .profile {
     display: flex;
     align-items: center;
     gap: 15px;
     cursor: pointer;
-    position: relative; /* needed for absolute menu inside */
+    position: relative; 
 }
 
 .profile img {
     width: 45px;
     border-radius: 50%;
     margin-right: 15px; 
-    /* align-self: flex-end; */
 }
 
 /*profile click*/
@@ -67,10 +59,6 @@ nav {
     display: none;
     z-index: 1000;
 }
- /* .profile-menu {
-    height: auto;
-    padding: 15px;
-} */
 
 .profile-menu.show {
     display: block;
@@ -91,9 +79,6 @@ nav {
     margin: 30px;
     border: 2px solid rgb(234, 237, 236);
     border-radius: 20px;
-    /* display: grid;
-    grid-template-columns: repeat(2, 1fr); */
-    /* 2 columns */
     gap: 20px;
     height: auto;
 }
@@ -119,9 +104,9 @@ nav {
     width: 300px;
     height: 150px;
     margin: 20px;
-    border: none; /* instead of whitesmoke */
+    border: none; 
     border-radius: 20px;
-    cursor: pointer; /* missing */
+    cursor: pointer; 
     transition: 0.3s;
 
 }
@@ -173,21 +158,18 @@ nav {
     border: 2px solid #e5e7eb;
 }
 
-/* Title */
 .complaint-card h3{
     font-size: 19px;
     font-weight: 600;
     margin-bottom: 6px;
 }
 
-/* Description */
 .complaint-card p{
     font-size: 15px;
     color: #444;
     margin-bottom: 14px;
 }
 
-/* --- STATUS BOX --- */
 .status-box{
     padding: 10px 14px;
     border-radius: 8px;
@@ -199,17 +181,14 @@ nav {
     margin-bottom: 10px;
 }
 
-/* Red for Pending */
 .status-pending{
     background-color: #d10000;
 }
 
-/* Green for solved */
 .status-resolved{
     background-color: #008f39;
 }
 
-/* Resolve Button */
 .resolve-btn{
     padding: 7px 16px;
     background: blue;

@@ -1,12 +1,6 @@
-// const supabaseUrl = "https://anxxhejgleehoinlubhx.supabase.co";
-// const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFueHhoZWpnbGVlaG9pbmx1Ymh4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc4NzE5NDcsImV4cCI6MjA4MzQ0Nzk0N30.TJCYy4C-hTnse_NZgL4XzP36sBrgk-tNtSx1cqu3F_s";
-
-// const supabase = supabase.createClient(supabaseUrl, supabaseKey);
-// console.log("Supabase client ready:", supabase);
 const SUPABASE_URL = "https://anxxhejgleehoinlubhx.supabase.co";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFueHhoZWpnbGVlaG9pbmx1Ymh4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc4NzE5NDcsImV4cCI6MjA4MzQ0Nzk0N30.TJCYy4C-hTnse_NZgL4XzP36sBrgk-tNtSx1cqu3F_s";
 
-// IMPORTANT: rename client
 window.supabaseClient = supabase.createClient(
   SUPABASE_URL,
   SUPABASE_KEY,

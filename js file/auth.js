@@ -1,6 +1,5 @@
-/* =========================
-   AUTH.JS
-========================= */
+
+  // AUTH.JS
 
 function $(id) {
   return document.getElementById(id);
@@ -14,7 +13,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const currentPage = window.location.pathname.split("/").pop();
 
-  // -------- SESSION CHECK ----------
+  // SESSION CHECK 
   const protectedPages = [
     "student-dashboard.html",
     "raise-complaints.html",
@@ -31,7 +30,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!user) window.location.href = currentPage.includes("admin") ? "admin-register.html" : "student-register.html";
   }
 
-  // -------- STUDENT LOGIN ----------
+  // STUDENT LOGIN 
   const studentLoginBtn = $("student-login");
   if (studentLoginBtn) {
     studentLoginBtn.addEventListener("click", async () => {
@@ -45,12 +44,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       if (error) return alert(error.message);
 
-      // Optionally verify hostel code here if needed
       window.location.href = "student-dashboard.html";
-    });
+    }); 
   }
 
-  // -------- ADMIN LOGIN ----------
+ // ADMIN LOGIN
+
   const adminLoginBtn = $("admin-login");
   if (adminLoginBtn) {
     adminLoginBtn.addEventListener("click", async () => {
@@ -65,10 +64,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // -------- BACK BUTTON ----------
+  // BACK BUTTON 
   $("back")?.addEventListener("click", () => window.history.back());
 
-  // -------- LOGOUT ----------
+  // LOGOUT 
   document.querySelector(".logout")?.addEventListener("click", async () => {
     await window.supabaseClient.auth.signOut();
     window.location.href = "index.html";

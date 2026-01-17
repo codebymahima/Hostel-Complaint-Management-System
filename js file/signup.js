@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
             email,
             password,
             options: {
-                // 🔽 YAHAN ADD KIYA HAI
+               
                 emailRedirectTo: "http://localhost:3000/student-register.html",
 
                 data: {

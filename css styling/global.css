@@ -1,5 +1,4 @@
-/* here we will write styling for the entire web page, common styling will be there */
-/* Styles of the first page of ous website */
+
 *{
     margin: 0;
     padding: 0;
@@ -21,7 +20,6 @@
     border-radius: 8px;
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
 }
 .head1{
