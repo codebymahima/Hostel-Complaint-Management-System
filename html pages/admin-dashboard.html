@@ -1,62 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="../css styling/admin.css">
-</head>
-
-<body>
-   <nav>
-        <h2 class="logo">Admin Dashboard</h2>
-
-      <div class="profile" id="profileBtn">
-    <span class="admin-name">Admin</span>
-    <img src="PFP.jpg">
-
-    <div class="profile-menu" id="profileMenu">
-        <p><strong>Name:</strong> admin</p>
-        <p><strong>Email:</strong> admin@example.com</p>
-        <button id="logoutBtn">Logout</button>
-    </div>
-</div>
-
-    </nav>
-
-    <main>
-        <div class="container">
-            <h1 class="heading">Welcome to Admin Dashboard</h1>
-
-            <div class="card">
-                <button class="card-btn blue">Total Complaints</button>
-                <button class="card-btn yellow">New Complaints</button>
-                <button class="card-btn red">Pending Complaints</button>
-                <button class="card-btn green">Resolved Complaints</button>
-            </div>
-
-            <div class="chart-section">
-                <h3>Complaint Status Overview</h3>
-                <canvas id="complaintChart"></canvas>
-            </div>
-        </div>
-    </main>
-
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    Your JS file -->
-    <!-- <script src="../js file/auth.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-
-</body>
-
-</html> -->
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,9 +6,10 @@
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="../css styling/admin.css">
 </head>
-<body>
+<body data-page="dashboard">
    <nav>
-        <h2 class="logo">Admin Dashboard</h2>
+        <h2 class="logo" id="adminDashboardBtn">Admin Dashboard</h2>
+
 
         <div class="profile" id="profileBtn">
             <span class="admin-name">Admin</span>

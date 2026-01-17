@@ -17,6 +17,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     await window.supabaseClient.auth.signOut();
     window.location.href = "admin-register.html";
   });
+   document.getElementById("adminDashboardBtn")?.addEventListener("click", () => {
+    window.location.href = "admin-dashboard.html";
+});
+
 
   // -------- Determine Page Type ----------
   const pageType = document.querySelector(".heading")?.textContent.toLowerCase();
@@ -56,26 +60,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   : "<p>No complaints found</p>";
 
   }
-
-  // -------- Chart ----------
-  const statusCounts = { pending: 0, resolved: 0 };
-  complaints.forEach(c => { if (c.status === "pending") statusCounts.pending++; else if (c.status === "resolved") statusCounts.resolved++; });
-
-  const ctx = document.getElementById("complaintChart").getContext("2d");
-  new Chart(ctx, {
-    type: "doughnut",
-    data: {
-      labels: ["Pending", "Resolved"],
-      datasets: [{
-        data: [statusCounts.pending, statusCounts.resolved],
-        backgroundColor: ["#f39c12", "#27ae60"]
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: { legend: { position: 'bottom' } }
-    }
-  });
 
 
   // -------- RESOLVE COMPLAINT + NOTIFICATION ----------

@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // -------- LOGOUT ----------
   document.querySelector(".logout")?.addEventListener("click", async () => {
     await window.supabaseClient.auth.signOut();
-    window.location.href = currentPage.includes("admin") ? "admin-register.html" : "student-register.html";
+    window.location.href = "index.html";
   });
 });
 

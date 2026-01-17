@@ -1,91 +1,36 @@
-// /* =========================
-//    chart.js – Admin Complaint Status Chart
-// ========================= */
-
-// document.addEventListener("DOMContentLoaded", async () => {
-//   if (!window.supabaseClient) {
-//     console.error("Supabase not loaded");
-//     return;
-//   }
-
-//   const ctx = document.getElementById("complaintChart").getContext("2d");
-
-//   // Initialize empty chart
-//   let complaintChart = new Chart(ctx, {
-//     type: "doughnut",
-//     data: {
-//       labels: ["Pending", "Resolved"],
-//       datasets: [{
-//         label: "Complaints",
-//         data: [0, 0],
-//         backgroundColor: ["#f39c12", "#27ae60"],
-//       }]
-//     },
-//     options: {
-//       responsive: true,
-//       plugins: {
-//         legend: {
-//           position: "bottom"
-//         },
-//         title: {
-//           display: true,
-//           text: "Complaint Status Overview"
-//         }
-//       }
-//     }
-//   });
-
-//   // Function to fetch complaint data and update chart
-//   async function updateChart() {
-//     const { data: complaints, error } = await window.supabaseClient
-//       .from("complaints")
-//       .select("status");
-
-//     if (error) {
-//       console.error("Error fetching complaints:", error);
-//       return;
-//     }
-
-//     const pendingCount = complaints.filter(c => c.status === "pending").length;
-//     const resolvedCount = complaints.filter(c => c.status === "resolved").length;
-
-//     complaintChart.data.datasets[0].data = [pendingCount, resolvedCount];
-//     complaintChart.update();
-//   }
-
-//   // Initial load
-//   await updateChart();
-
-//   // Optional: auto-refresh chart every 15 seconds
-//   setInterval(updateChart, 15000);
-// });
-
-
-// admin.js ke andar
 document.addEventListener("DOMContentLoaded", async () => {
-  // Supabase se complaints fetch
-  const { data: complaints, error } = await supabaseClient
+  const page = document.body.dataset.page;
+
+  // chart sirf dashboard + total complaints
+  if (page !== "dashboard" && page !== "all") return;
+
+  if (!window.supabaseClient) {
+    console.error("Supabase not loaded");
+    return;
+  }
+
+  const chartCanvas = document.getElementById("complaintChart");
+  if (!chartCanvas) return;
+
+  const { data: complaints, error } = await window.supabaseClient
     .from("complaints")
-    .select("*");
+    .select("status");
 
-  if (error) return console.error(error);
+  if (error) {
+    console.error(error);
+    return;
+  }
 
-  // count by status
-  const statusCounts = { pending: 0, resolved: 0, new: 0 };
-  complaints.forEach(c => {
-    if (statusCounts[c.status] !== undefined) statusCounts[c.status]++;
-  });
+  const pendingCount = complaints.filter(c => c.status === "pending").length;
+  const resolvedCount = complaints.filter(c => c.status === "resolved").length;
 
-  // Chart render
-  const ctx = document.getElementById("complaintChart").getContext("2d");
-  new Chart(ctx, {
+  new Chart(chartCanvas.getContext("2d"), {
     type: "doughnut",
     data: {
-      labels: ["Pending", "Resolved", "New"],
+      labels: ["Pending", "Resolved"],
       datasets: [{
-        label: "Complaints",
-        data: [statusCounts.pending, statusCounts.resolved, statusCounts.new],
-        backgroundColor: ["#f7f76a", "#28e34c", "#0099ff"]
+        data: [pendingCount, resolvedCount],
+        backgroundColor: ["#f39c12", "#27ae60"]
       }]
     },
     options: {
