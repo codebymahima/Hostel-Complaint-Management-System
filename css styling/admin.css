@@ -111,6 +111,8 @@ nav {
     border-radius: 20px;
     cursor: pointer; 
     transition: 0.3s;
+    
+  
 
 }
 
@@ -137,7 +139,8 @@ nav {
 
 .chart-section {
     justify-self: center;
-    width: 400px;
+    width: 100%;
+    min-height: 280px;
   margin-top: 20px;
   background: white;
   padding: 30px;
@@ -145,6 +148,12 @@ nav {
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   font-family: poppins;
 }
+
+.chart-section canvas {
+  width: 100% !important;
+  height: 260px !important;
+}
+
 
 .chart-section h3 {
 
@@ -207,8 +216,27 @@ nav {
 }
 
 
+.card-btn h2,
+.card-btn h3,
+.card-btn p,
+.card-btn span {
+  text-align: center;
+  line-height: 1.3;
+}
+
+
+
 
 @media (max-width: 768px) {
+
+
+     .main {
+    display: block;   /* instead of grid on mobile */
+  }
+
+  .content {
+    padding: 16px;
+  }
 
   /* Navbar */
   nav {
@@ -249,9 +277,13 @@ nav {
 
   .card-btn {
     width: 100%;
-    height: 90px;
+    min-height: 90px;
+    height: auto;
     font-size: 16px;
-    margin: 0;
+    display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   }
 
   /* Chart */
