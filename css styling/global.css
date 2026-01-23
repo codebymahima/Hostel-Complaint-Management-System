@@ -1,12 +1,17 @@
-
 *{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden;
 }
 .main{
     background-color: rgb(193, 255, 255);
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    min-height: 100vh;
     display: flex;
     
 }
@@ -54,4 +59,10 @@
     flex-direction: column;
     justify-items: center;
     align-self: center;
+}
+
+@media (max-width: 480px) {
+  .row {
+    flex-direction: column;
+  }
 }
