@@ -41,25 +41,36 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
+  // const list = document.getElementById("complaintList");
+  // if (list) {
+  //   list.innerHTML = complaints.length
+  // ? complaints.map(c => `
+  //     <div class="complaint-card">
+  //       <h3>${c.title}</h3>
+  //       <p>${c.description}</p>
+  //       <small>Status: ${c.status}</small>
+
+  //       ${c.status === "pending" ? 
+  //         `<button class="resolve-btn" data-id="${c.id}" data-student="${c.student_id}">
+  //           Mark as Resolved
+  //         </button>` 
+  //       : ""}
+  //     </div>
+  //   `).join("")
+  // : "<p>No complaints found</p>";
+
+  // }
+
   const list = document.getElementById("complaintList");
-  if (list) {
-    list.innerHTML = complaints.length
-  ? complaints.map(c => `
-      <div class="complaint-card">
-        <h3>${c.title}</h3>
-        <p>${c.description}</p>
-        <small>Status: ${c.status}</small>
-
-        ${c.status === "pending" ? 
-          `<button class="resolve-btn" data-id="${c.id}" data-student="${c.student_id}">
-            Mark as Resolved
-          </button>` 
-        : ""}
-      </div>
-    `).join("")
-  : "<p>No complaints found</p>";
-
+if (list) {
+  list.innerHTML = ""; // clear old content
+  if (!complaints.length) {
+    list.innerHTML = "<p>No complaints found</p>";
+  } else {
+    complaints.forEach(c => renderComplaint(c));
   }
+}
+
 
 
   // RESOLVE COMPLAINT + NOTIFICATION
@@ -101,34 +112,69 @@ document.addEventListener("click", async (e) => {
 
 //total-complaint
 function renderComplaint(c) {
-    const list = document.getElementById("complaintList");
+  const list = document.getElementById("complaintList");
 
-    const card = document.createElement("div");
-    card.className = "complaint-card";
+  const card = document.createElement("div");
+  card.className = "complaint-card";
 
-    const statusText = c.status.trim().toLowerCase(); 
+  const statusText = c.status.trim().toLowerCase(); 
 
-    let statusClass = "";
-    if (statusText.includes("pending")) {
-        statusClass = "status-pending";
-    }
-    else if (statusText.includes("resolved") || statusText.includes("solved")) {
-        statusClass = "status-resolved";
-    }
+  let statusClass = "";
+  if (statusText === "pending") {
+      statusClass = "status-pending";
+  } else if (statusText === "resolved") {
+      statusClass = "status-resolved";
+  }
 
-    card.innerHTML = `
-        <h3>${c.title}</h3>
-        <p>${c.details}</p>
+  card.innerHTML = `
+      <h3>${c.title}</h3>
+      <p>${c.description}</p>
 
-        <div class="status-box ${statusClass}">
-            ${c.status}
-        </div>
+      <div class="status-box ${statusClass}">
+          ${c.status}
+      </div>
 
-        ${statusText.includes("pending") 
-            ? `<button class="resolve-btn" onclick="markResolved('${c.id}')">Mark as Resolved</button>` 
-            : ""
-        }
-    `;
+      ${statusText === "pending"
+          ? `<button class="resolve-btn" data-id="${c.id}" data-student="${c.student_id}">
+              Mark as Resolved
+            </button>`
+          : ""
+      }
+  `;
 
-    list.appendChild(card);
+  list.appendChild(card);
 }
+
+
+// function renderComplaint(c) {
+//     const list = document.getElementById("complaintList");
+
+//     const card = document.createElement("div");
+//     card.className = "complaint-card";
+
+//     const statusText = c.status.trim().toLowerCase(); 
+
+//     let statusClass = "";
+//     if (statusText.includes("pending")) {
+//         statusClass = "status-pending";
+//     }
+//     else if (statusText.includes("resolved") || statusText.includes("solved")) {
+//         statusClass = "status-resolved";
+//     }
+
+//     card.innerHTML = `
+//         <h3>${c.title}</h3>
+//         <p>${c.details}</p>
+
+//         <div class="status-box ${statusClass}">
+//             ${c.status}
+//         </div>
+
+//         ${statusText.includes("pending") 
+//             ? `<button class="resolve-btn" onclick="markResolved('${c.id}')">Mark as Resolved</button>` 
+//             : ""
+//         }
+//     `;
+
+//     list.appendChild(card);
+// }
