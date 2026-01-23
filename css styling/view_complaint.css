@@ -4,7 +4,12 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box ;
+     /* outline: 1px solid red; */
     
+}
+body{
+  overflow-x: hidden;
+
 }
 
 html, body {
@@ -14,7 +19,7 @@ html, body {
     border: none;
     background-color: whitesmoke;
     display: grid;
-    grid-template-columns: 280px 1fr;
+    grid-template-columns: 280px minmax(0,1fr);
     gap: 24px;
     align-items: start;
     min-height: 100vh;
@@ -31,8 +36,7 @@ html, body {
 .form {
     background-color: white;
   padding: 24px;
-  margin: 20px;
-  margin: 30px;
+  /* margin: 30px; */
   border: 2px solid rgb(234, 237, 236);
   border-radius: 20px;
 }
@@ -161,3 +165,46 @@ h3{
     color: gray;
     font-size: 13px;
 }
+
+
+@media (max-width: 768px) {
+  .main {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    gap: 0;
+  }
+
+  .side {
+    width: 100%;
+    height: auto;
+  }
+
+  .form {
+    /* margin: 12px; */
+    padding: 16px;
+  }
+
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  h3 {
+    font-size: 16px;
+  }
+
+  .btn,
+  .logout {
+    margin: 8px;
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .sideHeader {
+    font-size: 18px;
+  }
+}
+
+
+
