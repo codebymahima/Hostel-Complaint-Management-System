@@ -1,8 +1,8 @@
 html, body {
     margin: 0;
     padding: 0;
-    height: 100%;
-    overflow: hidden;
+    min-height: 100%;
+    /* overflow: hidden; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,7 +12,9 @@ html, body {
 
 
 .login {
-    width: 400px;
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
     border: 3px solid gray;
     background-color: white;
     padding: 35px;
@@ -32,7 +34,8 @@ p {
 }
 
 input {
-    width: 90%;
+    width: 100%;
+    box-sizing: border-box;
     padding: 12px;
     border: 1px solid black;
     border-radius: 12px;
@@ -41,7 +44,8 @@ input {
 }
 
 button {
-    width: 95%;
+    width: 100%;
+    box-sizing: border-box;
     padding: 12px;
     background: blue;
     color: white;
